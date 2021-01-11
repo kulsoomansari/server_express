@@ -4,31 +4,29 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const app = express()
 const PORT = 4000;
-
-app.use(bodyParser.urlencoded({extended: true}))
+const users = require('./Users')
 app.listen(PORT, (req, res)=>{
     console.log('server is running on port:', PORT)
 })
-let users = [
-    {name: 'kulsoom', email: 'kulsoom@gmail.com', pwd: 1234}
-]
-app.get('/',(req, res)=>{
- res.sendFile(path.join(__dirname, 'public', 'index.html'))
-})
-// app.get('/aboutus', (req, res)=>{
-//     // res.send('<h1>About us</h1>')
+app.use(bodyParser.urlencoded({extended: true}))
+
+// let users = [
+//     {name: 'kulsoom', email: 'kulsoom@gmail.com', pwd: 1234}
+// ]
+// app.get('/',(req, res)=>{
+//  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+// })
+//  app.get('/aboutus', (req, res)=>{
+//  res.send('<h1>About us</h1>')
 //     res.sendFile(path.join(__dirname, 'public', 'aboutus.html'))
 // })
 // app.get('/contactus', (req, res)=>{
-//     res.sendFile(path.join(__dirname, 'public', 'contactus.html'))
-// })
-// app.use(express.static(path.join(__dirname, 'public')))
-
-
-
-// app.get('/signUp', (req,res)=>{
-//     res.sendFile(path.join(__dirname, 'registration', 'signUp.html'))
-// })
+// res.sendFile(path.join(__dirname, 'public', 'contactus.html'))
+//  })
+app.use(express.static(path.join(__dirname, 'public')))
+app.get('/signUp', (req,res)=>{
+    res.sendFile(path.join(__dirname, 'registration', 'signUp.html'))
+})
 
 app.use(express.static(path.join(__dirname, 'registration')))
 app.post('/signUp.html', (req, res)=>{
